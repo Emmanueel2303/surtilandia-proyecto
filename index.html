@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Surtilandia, tienda virtual multiproducto con precios bajos, surtido variado y una presentacion tipo marketplace."
+    />
+    <title>Surtilandia | El lugar de los precios bajos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-progress" aria-hidden="true">
+      <span class="page-progress__bar"></span>
+    </div>
+
+    <div class="topbar">
+      <div class="container topbar__content">
+        <p>Envios a toda Colombia</p>
+        <p>Compra facil por Instagram</p>
+        <p>Ofertas activas todos los dias</p>
+      </div>
+    </div>
+
+    <header class="header">
+      <div class="container header__main">
+        <a class="brand" href="#inicio" aria-label="Surtilandia">
+          <span class="brand__surti">surti</span>
+          <span class="brand__landia" aria-hidden="true">
+            <span class="bubble bubble--blue">L</span>
+            <span class="bubble bubble--orange">A</span>
+            <span class="bubble bubble--indigo">N</span>
+            <span class="bubble bubble--lime">D</span>
+            <span class="bubble bubble--yellow">I</span>
+            <span class="bubble bubble--pink">A</span>
+          </span>
+          <span class="brand__tagline">El lugar de los precios bajos</span>
+        </a>
+
+        <form class="header__search" id="heroSearch">
+          <label class="sr-only" for="hero-search-input">Buscar productos</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M10.75 4a6.75 6.75 0 1 0 0 13.5A6.75 6.75 0 0 0 10.75 4Zm0-2a8.75 8.75 0 1 1 0 17.5 8.75 8.75 0 0 1 0-17.5Zm7.69 14.03 3.53 3.53-1.41 1.41-3.53-3.53 1.41-1.41Z"
+            />
+          </svg>
+          <input
+            id="hero-search-input"
+            name="search"
+            type="search"
+            placeholder="Busca tecnologia, hogar, belleza, cocina y mucho mas"
+          />
+          <button type="submit">Buscar</button>
+        </form>
+
+        <div class="header__actions">
+          <a href="#catalogo">Catalogo</a>
+          <a href="#marca">Marca</a>
+          <a href="#comunidad">Comunidad</a>
+          <a href="https://www.instagram.com/surtilandiavirtual/" target="_blank" rel="noreferrer">
+            Instagram
+          </a>
+        </div>
+      </div>
+
+      <nav class="header__nav">
+        <div class="container nav__chips" id="navCategories">
+          <button class="nav-chip is-active" data-category="Todos" type="button">Inicio</button>
+          <button class="nav-chip" data-category="Tecnologia" type="button">Tecnologia</button>
+          <button class="nav-chip" data-category="Hogar" type="button">Hogar</button>
+          <button class="nav-chip" data-category="Belleza" type="button">Belleza</button>
+          <button class="nav-chip" data-category="Cocina" type="button">Cocina</button>
+          <button class="nav-chip" data-category="Moda" type="button">Moda</button>
+          <button class="nav-chip" data-category="Infantil" type="button">Infantil</button>
+          <button class="nav-chip" data-category="Mascotas" type="button">Mascotas</button>
+        </div>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="launch">
+        <div class="container">
+          <div class="hero-showcase">
+            <div class="hero-showcase__copy" data-reveal>
+              <span class="hero-showcase__kicker">SURTITODO VIRTUAL</span>
+              <h1>
+                SURTILANDIA
+                <span>OFERTAS Y NOVEDADES</span>
+              </h1>
+              <p>
+                Una portada mas representativa de la marca, con el colorido de Surtilandia y una entrada
+                visual limpia para mostrar variedad, promociones y acceso directo al catalogo.
+              </p>
+
+              <div class="hero-showcase__actions">
+                <a class="btn btn--danger" href="#catalogo">VER CATALOGO</a>
+                <a
+                  class="btn btn--light"
+                  href="https://www.instagram.com/surtilandiavirtual/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  VER INSTAGRAM
+                </a>
+              </div>
+
+              <div class="hero-showcase__badges">
+                <span>Precios bajos</span>
+                <span>Variedad real</span>
+                <span>Compra por mensaje</span>
+              </div>
+            </div>
+
+            <div class="hero-showcase__visual" data-reveal>
+              <div class="hero-showcase__tag hero-showcase__tag--top">PROMOS ACTIVAS</div>
+              <img
+                class="hero-showcase__main-image"
+                  src="https://images.unsplash.com/photo-1607082350920-303c0aef5f1c?auto=format&fit=crop&w=1200&q=80"
+                  alt="Productos y compras online en Surtilandia"
+                />
+              <div class="hero-showcase__tag hero-showcase__tag--bottom">EXPLORA SURTI</div>
+            </div>
+
+            <div class="hero-showcase__shelf" data-reveal>
+              <article class="shelf-item" data-category-target="Tecnologia" role="button" tabindex="0">
+                <img
+                  src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=500&q=80"
+                  alt="Producto de tecnologia"
+                />
+              </article>
+              <article class="shelf-item" data-category-target="Hogar" role="button" tabindex="0">
+                <img
+                  src="https://images.unsplash.com/photo-1586208958839-06c17cacdf08?auto=format&fit=crop&w=500&q=80"
+                  alt="Producto para el hogar"
+                />
+              </article>
+              <article class="shelf-item" data-category-target="Belleza" role="button" tabindex="0">
+                <img
+                  src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=500&q=80"
+                  alt="Producto de belleza"
+                />
+              </article>
+              <article class="shelf-item" data-category-target="Moda" role="button" tabindex="0">
+                <img
+                  src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=80"
+                  alt="Producto de moda"
+                />
+              </article>
+              <article class="shelf-item" data-category-target="Mascotas" role="button" tabindex="0">
+                <img
+                  src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+                  alt="Producto para mascotas"
+                />
+              </article>
+            </div>
+          </div>
+
+          <div class="showcase-grid">
+            <article
+              class="showcase-card showcase-card--tech"
+              data-category-target="Tecnologia"
+              role="button"
+              tabindex="0"
+              data-reveal
+            >
+              <img
+                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80"
+                alt="Categoria tecnologia"
+              />
+              <div class="showcase-card__overlay"></div>
+              <div class="showcase-card__content">
+                <span>TECNOLOGIA</span>
+                <a href="#catalogo">VER MAS</a>
+              </div>
+            </article>
+
+            <article
+              class="showcase-card showcase-card--home"
+              data-category-target="Hogar"
+              role="button"
+              tabindex="0"
+              data-reveal
+            >
+              <img
+                src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"
+                alt="Categoria hogar"
+              />
+              <div class="showcase-card__overlay"></div>
+              <div class="showcase-card__content">
+                <span>HOGAR</span>
+                <a href="#catalogo">VER MAS</a>
+              </div>
+            </article>
+
+            <article
+              class="showcase-card showcase-card--beauty"
+              data-category-target="Belleza"
+              role="button"
+              tabindex="0"
+              data-reveal
+            >
+              <img
+                src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=80"
+                alt="Categoria belleza"
+              />
+              <div class="showcase-card__overlay"></div>
+              <div class="showcase-card__content">
+                <span>BELLEZA</span>
+                <a href="#catalogo">VER MAS</a>
+              </div>
+            </article>
+
+            <article
+              class="showcase-card showcase-card--kitchen showcase-card--wide"
+              data-category-target="Cocina"
+              role="button"
+              tabindex="0"
+              data-reveal
+            >
+              <img
+                src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1200&q=80"
+                alt="Categoria cocina"
+              />
+              <div class="showcase-card__overlay"></div>
+              <div class="showcase-card__content">
+                <span>COCINA</span>
+                <a href="#catalogo">VER MAS</a>
+              </div>
+            </article>
+
+            <article
+              class="showcase-card showcase-card--fashion showcase-card--wide"
+              data-category-target="Moda"
+              role="button"
+              tabindex="0"
+              data-reveal
+            >
+              <img
+                src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=80"
+                alt="Categoria moda"
+              />
+              <div class="showcase-card__overlay"></div>
+              <div class="showcase-card__content">
+                <span>MODA</span>
+                <a href="#catalogo">VER MAS</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="brand-marquee" data-reveal>
+            <div class="brand-marquee__track">
+              <span>Surtilandia</span>
+              <span>Precios bajos</span>
+              <span>Compra por Instagram</span>
+              <span>Variedad real</span>
+              <span>Tecnologia</span>
+              <span>Hogar</span>
+              <span>Belleza</span>
+              <span>Cocina</span>
+              <span>Moda</span>
+              <span>Mascotas</span>
+              <span>Novedades todos los dias</span>
+            </div>
+            <div class="brand-marquee__track" aria-hidden="true">
+              <span>Surtilandia</span>
+              <span>Precios bajos</span>
+              <span>Compra por Instagram</span>
+              <span>Variedad real</span>
+              <span>Tecnologia</span>
+              <span>Hogar</span>
+              <span>Belleza</span>
+              <span>Cocina</span>
+              <span>Moda</span>
+              <span>Mascotas</span>
+              <span>Novedades todos los dias</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="catalog section" id="catalogo">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <span class="eyebrow">Catalogo completo</span>
+            <h2>Explora Surtilandia por categoria y encuentra de todo.</h2>
+            <p class="section-heading__text">
+              Ahora el inicio conecta directamente con el catalogo, para que la experiencia sea mas rapida,
+              mas clara y mas alineada con la personalidad visual de la marca.
+            </p>
+          </div>
+
+          <div class="catalog__panel">
+            <div class="catalog__filters" data-reveal>
+              <div class="field field--search">
+                <label class="sr-only" for="catalogSearch">Buscar en catalogo</label>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M10.75 4a6.75 6.75 0 1 0 0 13.5A6.75 6.75 0 0 0 10.75 4Zm0-2a8.75 8.75 0 1 1 0 17.5 8.75 8.75 0 0 1 0-17.5Zm7.69 14.03 3.53 3.53-1.41 1.41-3.53-3.53 1.41-1.41Z"
+                  />
+                </svg>
+                <input id="catalogSearch" type="search" placeholder="Buscar producto o categoria" />
+              </div>
+
+              <div class="field">
+                <label for="cityFilter">Ciudad</label>
+                <select id="cityFilter">
+                  <option value="Todas">Todas</option>
+                  <option value="Bogota">Bogota</option>
+                  <option value="Medellin">Medellin</option>
+                  <option value="Cali">Cali</option>
+                  <option value="Barranquilla">Barranquilla</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="sortFilter">Ordenar por</label>
+                <select id="sortFilter">
+                  <option value="featured">Destacados</option>
+                  <option value="price-asc">Menor precio</option>
+                  <option value="price-desc">Mayor precio</option>
+                  <option value="name">Nombre</option>
+                </select>
+              </div>
+
+              <div class="field field--button">
+                <button class="btn btn--primary btn--block" id="clearFilters" type="button">
+                  Limpiar filtros
+                </button>
+              </div>
+            </div>
+
+            <div class="catalog__meta" data-reveal>
+              <div class="filter-pills" id="filterPills">
+                <button class="filter-pill is-active" type="button" data-category="Todos">Todos</button>
+                <button class="filter-pill" type="button" data-category="Tecnologia">Tecnologia</button>
+                <button class="filter-pill" type="button" data-category="Hogar">Hogar</button>
+                <button class="filter-pill" type="button" data-category="Belleza">Belleza</button>
+                <button class="filter-pill" type="button" data-category="Cocina">Cocina</button>
+                <button class="filter-pill" type="button" data-category="Moda">Moda</button>
+                <button class="filter-pill" type="button" data-category="Infantil">Infantil</button>
+                <button class="filter-pill" type="button" data-category="Mascotas">Mascotas</button>
+              </div>
+              <p id="resultsCount">Mostrando 0 productos</p>
+            </div>
+
+            <div class="product-grid" id="productGrid" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="brand-story section" id="marca">
+        <div class="container">
+          <div class="brand-story__layout">
+            <div class="brand-story__main" data-reveal>
+              <span class="eyebrow">Nuestra esencia</span>
+              <h2>Surtilandia nace para reunir variedad, precio y cercania en una sola vitrina.</h2>
+              <p>
+                La marca se siente como un surtitodo digital: cercana, colorida, agil y pensada para quienes
+                quieren encontrar opciones utiles sin entrar a una tienda fria o complicada. La idea es que
+                comprar aqui se sienta simple, visual y confiable.
+              </p>
+
+              <div class="brand-story__timeline">
+                <article class="timeline-card">
+                  <span>01</span>
+                  <h3>Idea de surtitodo</h3>
+                  <p>Un espacio para mezclar hogar, tecnologia, moda, belleza y novedades en un solo lugar.</p>
+                </article>
+
+                <article class="timeline-card">
+                  <span>02</span>
+                  <h3>Canal social</h3>
+                  <p>Instagram funciona como escaparate, inspiracion y punto de contacto para mover producto.</p>
+                </article>
+
+                <article class="timeline-card">
+                  <span>03</span>
+                  <h3>Experiencia clara</h3>
+                  <p>Una pagina que ayuda a mirar rapido, comparar opciones y llegar mas facil a la compra.</p>
+                </article>
+              </div>
+            </div>
+
+            <aside class="brand-story__aside" data-reveal>
+              <div class="story-stat story-stat--blue">
+                <strong>Surtitodo digital</strong>
+                <span>Una sola marca para muchas necesidades del dia a dia.</span>
+              </div>
+
+              <div class="story-stat story-stat--lime">
+                <strong>Presencia cercana</strong>
+                <span>Comunica como tienda real: mas humana, mas visible y mas accesible.</span>
+              </div>
+
+              <div class="story-stat story-stat--pink">
+                <strong>Personalidad propia</strong>
+                <span>El colorido del logo se vuelve parte de toda la experiencia de la pagina.</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="brand-signature section">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <span class="eyebrow">Identidad Surtilandia</span>
+            <h2>Una marca pensada para verse viva, amplia y cercana en cada bloque de la pagina.</h2>
+            <p class="section-heading__text">
+              Surtilandia no se siente como una tienda rigida. Su fuerza esta en mezclar categorias, color
+              y una entrada visual mas fresca para que la gente descubra producto, promociones y confianza
+              en pocos segundos.
+            </p>
+          </div>
+
+          <div class="brand-signature__grid">
+            <article class="signature-panel signature-panel--yellow" data-reveal>
+              <span>Historia visual</span>
+              <h3>De vitrina social a escaparate con identidad propia</h3>
+              <p>La tienda crece desde una logica social: mostrar, conversar, recomendar y cerrar la compra.</p>
+            </article>
+
+            <article class="signature-panel signature-panel--blue" data-reveal>
+              <span>Multiproducto</span>
+              <h3>Una sola marca para muchas necesidades</h3>
+              <p>Tecnologia, hogar, belleza, moda y novedades conviven dentro de una misma experiencia.</p>
+            </article>
+
+            <article class="signature-panel signature-panel--lime" data-reveal>
+              <span>Cercania</span>
+              <h3>Una tienda que se siente facil de preguntar y de pedir</h3>
+              <p>El tono visual acompana una compra mas simple, mas humana y mas lista para convertir.</p>
+            </article>
+
+            <article class="signature-panel signature-panel--pink" data-reveal>
+              <span>Recordacion</span>
+              <h3>El color del logo se vuelve parte de la experiencia</h3>
+              <p>La pagina deja de verse generica y empieza a sentirse claramente Surtilandia.</p>
+            </article>
+          </div>
+
+          <div class="brand-signature__bar" data-reveal>
+            <div class="signature-chip signature-chip--orange">Variedad visible</div>
+            <div class="signature-chip signature-chip--indigo">Compra por mensaje</div>
+            <div class="signature-chip signature-chip--blue">Bloques comerciales</div>
+            <div class="signature-chip signature-chip--yellow">Imagen mas memorable</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="audience section">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <span class="eyebrow">Clientes y comunidad</span>
+            <h2>Surtilandia conecta con diferentes tipos de clientes sin perder su identidad.</h2>
+            <p class="section-heading__text">
+              La marca no habla para un solo perfil. Funciona para quienes buscan resolver compras utiles,
+              encontrar novedades o descubrir productos que se ven bien y se venden bien.
+            </p>
+          </div>
+
+          <div class="audience__grid">
+            <article class="audience-card audience-card--yellow" data-reveal>
+              <span>Familias</span>
+              <h3>Compras practicas para el hogar</h3>
+              <p>Clientes que quieren soluciones utiles, organizacion, cocina, detalles y compras funcionales.</p>
+            </article>
+
+            <article class="audience-card audience-card--blue" data-reveal>
+              <span>Compradores digitales</span>
+              <h3>Novedades y tecnologia facil de explorar</h3>
+              <p>Personas que llegan por redes y esperan una vitrina rapida, clara y llamativa.</p>
+            </article>
+
+            <article class="audience-card audience-card--pink" data-reveal>
+              <span>Moda y belleza</span>
+              <h3>Productos visuales con impulso comercial</h3>
+              <p>Categorias que ganan mucho cuando la marca se ve fresca, ordenada y con personalidad.</p>
+            </article>
+
+            <article class="audience-card audience-card--indigo" data-reveal>
+              <span>Emprendimiento social</span>
+              <h3>Una tienda pensada para crecer desde comunidad</h3>
+              <p>Surtilandia puede mover trafico desde Instagram y convertirlo en interes y venta.</p>
+            </article>
+          </div>
+
+          <div class="trust-banner" data-reveal>
+            <div class="trust-banner__copy">
+              <span class="eyebrow">Por que elegir Surtilandia</span>
+              <h2>Una marca que mezcla cercania, variedad y una experiencia visual mucho mas viva.</h2>
+            </div>
+
+            <div class="trust-banner__list">
+              <div class="trust-point">
+                <strong>Variedad de categorias</strong>
+                <span>Una tienda que no se siente limitada a un solo tipo de producto.</span>
+              </div>
+              <div class="trust-point">
+                <strong>Imagen comercial</strong>
+                <span>Color, dinamismo y bloques pensados para mostrar promo y novedad.</span>
+              </div>
+              <div class="trust-point">
+                <strong>Ruta de compra simple</strong>
+                <span>Del descubrimiento a la accion con menos friccion y mejor lectura visual.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="community-journey section" id="comunidad">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <span class="eyebrow">Como compra la comunidad</span>
+            <h2>Una ruta pensada para clientes reales que llegan por curiosidad, confianza y variedad.</h2>
+            <p class="section-heading__text">
+              La experiencia ideal de Surtilandia no es complicada: primero atrapa visualmente, luego
+              organiza el surtido y por ultimo facilita el contacto para cerrar la compra mas rapido.
+            </p>
+          </div>
+
+          <div class="community-journey__grid">
+            <article class="journey-card journey-card--blue" data-reveal>
+              <span>01</span>
+              <h3>Descubre la vitrina</h3>
+              <p>El cliente entra por una portada mas llamativa, por una categoria o por un producto que le interesa.</p>
+            </article>
+
+            <article class="journey-card journey-card--yellow" data-reveal>
+              <span>02</span>
+              <h3>Explora y compara</h3>
+              <p>Los filtros, categorias y tarjetas ayudan a mirar rapido sin perder tiempo entre demasiados pasos.</p>
+            </article>
+
+            <article class="journey-card journey-card--pink" data-reveal>
+              <span>03</span>
+              <h3>Pregunta y compra</h3>
+              <p>Instagram y el contacto directo refuerzan una compra mas cercana, agil y facil de continuar.</p>
+            </article>
+          </div>
+
+          <div class="community-panels">
+            <article class="community-panel" data-reveal>
+              <span>Clientes del hogar</span>
+              <h3>Buscan solucion, orden y compras utiles para el dia a dia.</h3>
+              <p>Valoran una tienda que les muestre productos funcionales sin sentirse complicada.</p>
+            </article>
+
+            <article class="community-panel" data-reveal>
+              <span>Clientes de novedad</span>
+              <h3>Entran por algo llamativo y se quedan por la variedad del catalogo.</h3>
+              <p>Necesitan una pagina viva, fresca y con suficiente movimiento visual para seguir explorando.</p>
+            </article>
+
+            <article class="community-panel" data-reveal>
+              <span>Clientes sociales</span>
+              <h3>Les gusta descubrir por Instagram y resolver la compra por mensaje.</h3>
+              <p>Para este perfil, la marca debe transmitir confianza desde el primer impacto visual.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="promo-banner section">
+        <div class="container">
+          <div class="promo-banner__card" data-reveal>
+            <div>
+              <span class="eyebrow eyebrow--dark-soft">Tienda social y comercial</span>
+              <h2>Una presentacion mas parecida a una portada promocional de tienda real.</h2>
+            </div>
+            <a
+              class="btn btn--light"
+              href="https://www.instagram.com/surtilandiavirtual/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              VISITAR INSTAGRAM
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__content">
+          <div>
+          <a class="brand brand--footer" href="#inicio" aria-label="Surtilandia">
+            <span class="brand__surti">surti</span>
+            <span class="brand__landia" aria-hidden="true">
+              <span class="bubble bubble--blue">L</span>
+              <span class="bubble bubble--orange">A</span>
+              <span class="bubble bubble--indigo">N</span>
+              <span class="bubble bubble--lime">D</span>
+              <span class="bubble bubble--yellow">I</span>
+              <span class="bubble bubble--pink">A</span>
+            </span>
+          </a>
+          <p>Surtilandia, el surtitodo digital con una imagen mas fiel a su marca, colorida, clara y lista para crecer.</p>
+          </div>
+
+          <div class="footer__links">
+          <a href="#catalogo">Catalogo</a>
+          <a href="#marca">Marca</a>
+          <a href="#comunidad">Comunidad</a>
+            <a href="https://www.instagram.com/surtilandiavirtual/" target="_blank" rel="noreferrer">
+              Instagram
+            </a>
+        </div>
+      </div>
+    </footer>
+
+    <a
+      class="floating-cta"
+      href="https://www.instagram.com/surtilandiavirtual/"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Explorar Surtilandia
+    </a>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
