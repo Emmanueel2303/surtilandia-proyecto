@@ -29,6 +29,17 @@ class AdminAuthTests(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertIn("/admin/login", response.headers["Location"])
 
+    def test_admin_sidebar_does_not_show_store_link(self):
+        with self.client.session_transaction() as session:
+            session["is_admin_authenticated"] = True
+            session["admin_username"] = "surtiadmin"
+
+        response = self.client.get("/admin")
+        body = response.get_data(as_text=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn("Ver tienda", body)
+
 
 if __name__ == "__main__":
     unittest.main()

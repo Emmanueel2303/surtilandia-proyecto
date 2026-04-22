@@ -1,4 +1,4 @@
-const products = [
+const fallbackProducts = [
   {
     name: "Audifonos Bluetooth Premium",
     category: "Tecnologia",
@@ -112,6 +112,9 @@ const products = [
       "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=80",
   },
 ];
+const products = Array.isArray(window.SURTI_PRODUCTS) && window.SURTI_PRODUCTS.length
+  ? window.SURTI_PRODUCTS
+  : fallbackProducts;
 
 const state = {
   search: "",
@@ -306,6 +309,7 @@ function getFilteredProducts() {
 }
 
 function productCardTemplate(product) {
+  const detailUrl = product.detailUrl || "#";
   return `
     <article class="product-card" data-reveal>
       <div class="product-card__media">
@@ -329,7 +333,7 @@ function productCardTemplate(product) {
         </div>
         <div class="product-card__footer">
           <span class="product-card__stock">${product.stock}</span>
-          <span class="product-card__cta">Pedir ahora</span>
+          <a class="product-card__cta" href="${detailUrl}">Pedir ahora</a>
         </div>
       </div>
     </article>

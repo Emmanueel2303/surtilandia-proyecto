@@ -2,3 +2,5 @@
 .surti-server.stdout
 .surti-server.stderr
 data/*.sqlite3
+__pycache__/
+*.pyc
