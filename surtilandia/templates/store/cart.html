@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Carrito | Surtilandia{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <header class="site-header">
+    <a class="site-brand" href="{{ url_for('store.home') }}">
+      <span class="site-brand__word">surti</span>
+      <span class="site-brand__bubbles">
+        <span class="bubble bubble--blue">L</span>
+        <span class="bubble bubble--orange">A</span>
+        <span class="bubble bubble--indigo">N</span>
+        <span class="bubble bubble--lime">D</span>
+        <span class="bubble bubble--yellow">I</span>
+        <span class="bubble bubble--pink">A</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="{{ url_for('store.home') }}">Seguir comprando</a>
+      <a href="{{ url_for('store.checkout') }}">Checkout</a>
+    </nav>
+  </header>
+
+  <main class="content-shell">
+    <section class="page-panel">
+      <div class="section-heading">
+        <span class="eyebrow">Tu carrito</span>
+        <h1>Revisa tus productos antes de continuar.</h1>
+      </div>
+      <div class="cart-grid">
+        <div class="cart-list" data-cart-root></div>
+        <aside class="cart-summary" data-cart-summary>
+          <h2>Resumen</h2>
+          <p>El total final se reflejará también en el checkout.</p>
+          <a class="button button--primary" href="{{ url_for('store.checkout') }}">Continuar al checkout</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    window.SURTI_PRODUCT_MAP = {{ product_map_json|safe }};
+    window.SURTI_PAGE = "cart";
+  </script>
+  <script src="{{ url_for('static', filename='js/store.js') }}"></script>
+{% endblock %}

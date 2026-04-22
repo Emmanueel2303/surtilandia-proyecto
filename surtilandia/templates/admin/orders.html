@@ -1,0 +1,45 @@
+{% extends "admin/layout.html" %}
+
+{% block admin_content %}
+  <section class="admin-section">
+    <div class="admin-section__heading">
+      <span class="admin-chip">Pedidos</span>
+      <h1>Listado operativo</h1>
+    </div>
+
+    <section class="admin-panel">
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Ciudad</th>
+              <th>Estado</th>
+              <th>Pago</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+              <tr>
+                <td>{{ order.public_order_id }}</td>
+                <td>{{ order.full_name }}</td>
+                <td>{{ order.city }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.payment_method }}</td>
+                <td>{{ order.total_display }}</td>
+                <td><a href="{{ url_for('admin.order_detail', public_order_id=order.public_order_id) }}">Ver detalle</a></td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="7">No hay pedidos todavia.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+{% endblock %}

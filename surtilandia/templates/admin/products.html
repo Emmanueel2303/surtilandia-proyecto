@@ -1,0 +1,44 @@
+{% extends "admin/layout.html" %}
+
+{% block admin_content %}
+  <section class="admin-section">
+    <div class="admin-section__heading admin-section__heading--row">
+      <div>
+        <span class="admin-chip">Catalogo</span>
+        <h1>Gestion de productos</h1>
+      </div>
+      <a class="admin-button" href="{{ url_for('admin.product_create') }}">Nuevo producto</a>
+    </div>
+
+    <section class="admin-panel">
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Referencia</th>
+              <th>Categoria</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in products %}
+              <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.reference }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.price_display }}</td>
+                <td>{{ product.stock }}</td>
+                <td>{{ "Activo" if product.is_active else "Oculto" }}</td>
+                <td><a href="{{ url_for('admin.product_edit', product_id=product.id) }}">Editar</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+{% endblock %}

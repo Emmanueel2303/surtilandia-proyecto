@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Admin | Surtilandia{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <a class="admin-brand" href="{{ url_for('admin.dashboard') }}">Surtilandia Admin</a>
+      <nav>
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin.products') }}">Productos</a>
+        <a href="{{ url_for('admin.orders') }}">Pedidos</a>
+        <a href="{{ url_for('admin.customers') }}">Clientes</a>
+        <a href="{{ url_for('store.home') }}">Ver tienda</a>
+      </nav>
+      <a class="admin-logout" href="{{ url_for('admin.logout') }}">Salir</a>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <span>Sesion activa</span>
+          <strong>{{ session.get("admin_username", "admin") }}</strong>
+        </div>
+      </header>
+      {% block admin_content %}{% endblock %}
+    </main>
+  </div>
+{% endblock %}

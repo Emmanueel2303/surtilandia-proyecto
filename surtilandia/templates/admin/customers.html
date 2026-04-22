@@ -1,0 +1,43 @@
+{% extends "admin/layout.html" %}
+
+{% block admin_content %}
+  <section class="admin-section">
+    <div class="admin-section__heading">
+      <span class="admin-chip">Clientes</span>
+      <h1>Base de compradores</h1>
+    </div>
+
+    <section class="admin-panel">
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Telefono</th>
+              <th>Correo</th>
+              <th>Ciudad</th>
+              <th>Pedidos</th>
+              <th>Total comprado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for customer in customers %}
+              <tr>
+                <td>{{ customer.full_name }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.city }}</td>
+                <td>{{ customer.total_orders }}</td>
+                <td>{{ customer.total_spent_display }}</td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="6">No hay clientes registrados todavia.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+{% endblock %}

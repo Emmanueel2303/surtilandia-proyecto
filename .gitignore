@@ -1,1 +1,4 @@
 .superpowers/
+.surti-server.stdout
+.surti-server.stderr
+data/*.sqlite3

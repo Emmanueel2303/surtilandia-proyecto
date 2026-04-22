@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Pedido {{ payload.order.public_order_id }} | Surtilandia{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <main class="content-shell">
+    <section class="page-panel success-panel">
+      <span class="eyebrow">Pedido confirmado</span>
+      <h1>Tu pedido ya quedó registrado.</h1>
+      <p class="success-id">{{ payload.order.public_order_id }}</p>
+      <div class="success-grid">
+        <div>
+          <span>Estado actual</span>
+          <strong>{{ payload.order.status }}</strong>
+        </div>
+        <div>
+          <span>Metodo de pago</span>
+          <strong>{{ payload.order.payment_method }}</strong>
+        </div>
+        <div>
+          <span>Total</span>
+          <strong>{{ payload.order.total_display }}</strong>
+        </div>
+      </div>
+
+      <div class="success-items">
+        {% for item in payload["items"] %}
+          <article>
+            <h2>{{ item.product_name_snapshot }}</h2>
+            <p>{{ item.quantity }} x {{ item.unit_price_display }}</p>
+            <strong>{{ item.subtotal_display }}</strong>
+          </article>
+        {% endfor %}
+      </div>
+
+      <div class="hero__actions">
+        <a class="button button--primary" href="{{ url_for('store.track_order', order_id=payload.order.public_order_id) }}">Seguir pedido</a>
+        <a class="button button--ghost" href="{{ url_for('store.home') }}">Volver a la tienda</a>
+      </div>
+    </section>
+  </main>
+{% endblock %}

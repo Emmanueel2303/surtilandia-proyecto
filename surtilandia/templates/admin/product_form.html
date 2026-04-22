@@ -1,0 +1,68 @@
+{% extends "admin/layout.html" %}
+
+{% block admin_content %}
+  <section class="admin-section">
+    <div class="admin-section__heading">
+      <span class="admin-chip">Productos</span>
+      <h1>{{ form_title }}</h1>
+    </div>
+
+    <form class="admin-panel admin-form" method="post" enctype="multipart/form-data">
+      <div class="admin-form__grid">
+        <label>
+          <span>Nombre</span>
+          <input name="name" value="{{ product.name if product else '' }}" required />
+        </label>
+        <label>
+          <span>Referencia</span>
+          <input name="reference" value="{{ product.reference if product else '' }}" required />
+        </label>
+        <label>
+          <span>Slug</span>
+          <input name="slug" value="{{ product.slug if product else '' }}" />
+        </label>
+        <label>
+          <span>Categoria</span>
+          <input name="category" value="{{ product.category if product else '' }}" required />
+        </label>
+        <label>
+          <span>Precio</span>
+          <input name="price" type="number" min="0" value="{{ product.price if product else '' }}" required />
+        </label>
+        <label>
+          <span>Stock</span>
+          <input name="stock" type="number" min="0" value="{{ product.stock if product else '' }}" required />
+        </label>
+        <label class="admin-form__full">
+          <span>Descripcion corta</span>
+          <textarea name="short_description" rows="3" required>{{ product.short_description if product else '' }}</textarea>
+        </label>
+        <label class="admin-form__full">
+          <span>Detalles</span>
+          <textarea name="details" rows="5" required>{{ product.details if product else '' }}</textarea>
+        </label>
+        <label class="admin-form__full">
+          <span>Imagen principal por URL</span>
+          <input name="primary_image_url" value="{{ product.primary_image if product else '' }}" />
+        </label>
+        <label class="admin-form__full">
+          <span>Subir imagenes adicionales</span>
+          <input name="gallery_images" type="file" accept="image/*" multiple />
+        </label>
+      </div>
+
+      {% if product and product.gallery_images %}
+        <div class="admin-gallery">
+          {% for image in product.gallery_images %}
+            <img src="{{ image }}" alt="{{ product.name }}" />
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="admin-form__actions">
+        <button class="admin-button" type="submit">Guardar producto</button>
+        <a class="admin-button admin-button--ghost" href="{{ url_for('admin.products') }}">Cancelar</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}

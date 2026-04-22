@@ -1,0 +1,68 @@
+{% extends "admin/layout.html" %}
+
+{% block admin_content %}
+  <section class="admin-section">
+    <div class="admin-section__heading">
+      <span class="admin-chip">Pedido</span>
+      <h1>{{ payload.order.public_order_id }}</h1>
+    </div>
+
+    <div class="admin-grid">
+      <section class="admin-panel">
+        <h2>Resumen</h2>
+        <dl class="detail-list">
+          <div><dt>Cliente</dt><dd>{{ payload.order.full_name }}</dd></div>
+          <div><dt>Telefono</dt><dd>{{ payload.order.phone }}</dd></div>
+          <div><dt>Correo</dt><dd>{{ payload.order.email }}</dd></div>
+          <div><dt>Estado</dt><dd>{{ payload.order.status }}</dd></div>
+          <div><dt>Pago</dt><dd>{{ payload.order.payment_method }} · {{ payload.order.payment_status }}</dd></div>
+          <div><dt>Total</dt><dd>{{ payload.order.total_display }}</dd></div>
+        </dl>
+
+        <form class="admin-status-form" method="post" action="{{ url_for('admin.update_order', public_order_id=payload.order.public_order_id) }}">
+          <label>
+            <span>Cambiar estado</span>
+            <select name="status">
+              {% for status in ["Pendiente", "Confirmado", "Enviado", "Entregado"] %}
+                <option value="{{ status }}" {% if status == payload.order.status %}selected{% endif %}>{{ status }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            <span>Nota interna</span>
+            <textarea name="note" rows="3"></textarea>
+          </label>
+          <button class="admin-button" type="submit">Actualizar pedido</button>
+        </form>
+      </section>
+
+      <section class="admin-panel">
+        <h2>Items</h2>
+        <div class="admin-list">
+          {% for item in payload["items"] %}
+            <div class="admin-list__item">
+              <div>
+                <strong>{{ item.product_name_snapshot }}</strong>
+                <p>{{ item.quantity }} x {{ item.unit_price_display }}</p>
+              </div>
+              <div><strong>{{ item.subtotal_display }}</strong></div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <h2>Historial</h2>
+        <div class="admin-list">
+          {% for event in payload["history"] %}
+            <div class="admin-list__item">
+              <div>
+                <strong>{{ event.to_status }}</strong>
+                <p>{{ event.note or "Sin nota" }}</p>
+              </div>
+              <div><span>{{ event.created_at[:16].replace("T", " ") }}</span></div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "admin/layout.html" %}
+
+{% block admin_content %}
+  <section class="admin-section">
+    <div class="admin-section__heading">
+      <span class="admin-chip">Resumen operativo</span>
+      <h1>Vista general del ecommerce</h1>
+    </div>
+
+    <div class="kpi-grid">
+      <article class="kpi-card">
+        <span>Pedidos totales</span>
+        <strong>{{ summary.total_orders }}</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Ventas acumuladas</span>
+        <strong>{{ summary.total_sales_display }}</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Pedidos pendientes</span>
+        <strong>{{ summary.pending_orders }}</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Entregados</span>
+        <strong>{{ summary.delivered_orders }}</strong>
+      </article>
+    </div>
+
+    <div class="admin-grid">
+      <section class="admin-panel">
+        <div class="admin-panel__header">
+          <h2>Pedidos recientes</h2>
+          <a href="{{ url_for('admin.orders') }}">Ver todos</a>
+        </div>
+        <div class="admin-list">
+          {% for order in summary.recent_orders %}
+            <a class="admin-list__item" href="{{ url_for('admin.order_detail', public_order_id=order.public_order_id) }}">
+              <div>
+                <strong>{{ order.public_order_id }}</strong>
+                <p>{{ order.full_name }} · {{ order.city }}</p>
+              </div>
+              <div>
+                <span>{{ order.status }}</span>
+                <strong>{{ order.total_display }}</strong>
+              </div>
+            </a>
+          {% else %}
+            <p class="admin-empty">Aun no hay pedidos registrados.</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="admin-panel">
+        <div class="admin-panel__header">
+          <h2>Stock bajo</h2>
+          <a href="{{ url_for('admin.products') }}">Gestionar</a>
+        </div>
+        <div class="admin-list">
+          {% for product in summary.stock_alerts %}
+            <div class="admin-list__item">
+              <div>
+                <strong>{{ product.name }}</strong>
+                <p>ID {{ product.id }}</p>
+              </div>
+              <div>
+                <span>{{ product.stock }} und.</span>
+              </div>
+            </div>
+          {% else %}
+            <p class="admin-empty">No hay alertas de inventario.</p>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </section>
+{% endblock %}

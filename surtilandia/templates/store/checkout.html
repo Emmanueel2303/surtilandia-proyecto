@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout | Surtilandia{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <header class="site-header">
+    <a class="site-brand" href="{{ url_for('store.home') }}">
+      <span class="site-brand__word">surti</span>
+      <span class="site-brand__bubbles">
+        <span class="bubble bubble--blue">L</span>
+        <span class="bubble bubble--orange">A</span>
+        <span class="bubble bubble--indigo">N</span>
+        <span class="bubble bubble--lime">D</span>
+        <span class="bubble bubble--yellow">I</span>
+        <span class="bubble bubble--pink">A</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="{{ url_for('store.cart') }}">Carrito</a>
+      <a href="{{ url_for('store.track_order') }}">Seguimiento</a>
+    </nav>
+  </header>
+
+  <main class="content-shell">
+    <section class="checkout-grid">
+      <form class="page-panel checkout-form" method="post" action="{{ url_for('store.checkout_submit') }}" data-checkout-form>
+        <div class="section-heading">
+          <span class="eyebrow">Checkout invitado</span>
+          <h1>Completa los datos del pedido.</h1>
+        </div>
+        <div class="form-grid">
+          <label>
+            <span>Nombre completo</span>
+            <input name="full_name" required />
+          </label>
+          <label>
+            <span>Telefono</span>
+            <input name="phone" required />
+          </label>
+          <label>
+            <span>Correo</span>
+            <input name="email" type="email" required />
+          </label>
+          <label>
+            <span>Ciudad</span>
+            <input name="city" required />
+          </label>
+          <label class="label--wide">
+            <span>Direccion</span>
+            <input name="address" required />
+          </label>
+          <label class="label--wide">
+            <span>Detalles adicionales</span>
+            <textarea name="address_notes" rows="3"></textarea>
+          </label>
+        </div>
+
+        <div class="payment-block">
+          <h2>Metodo de pago</h2>
+          <label class="option-row">
+            <input name="payment_method" type="radio" value="wompi" checked />
+            <div>
+              <strong>Wompi demo</strong>
+              <p>Se registra como pago online de demostracion mientras configuramos la integracion real.</p>
+            </div>
+          </label>
+          <label class="option-row">
+            <input name="payment_method" type="radio" value="cash_on_delivery" />
+            <div>
+              <strong>Contra entrega</strong>
+              <p>El pedido queda creado para pago en efectivo al recibir.</p>
+            </div>
+          </label>
+        </div>
+
+        <input name="items" type="hidden" data-checkout-items />
+
+        <button class="button button--primary button--full" type="submit">Crear pedido</button>
+      </form>
+
+      <aside class="page-panel checkout-summary">
+        <h2>Resumen del pedido</h2>
+        <div data-checkout-summary></div>
+      </aside>
+    </section>
+  </main>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    window.SURTI_PRODUCT_MAP = {{ product_map_json|safe }};
+    window.SURTI_PAGE = "checkout";
+  </script>
+  <script src="{{ url_for('static', filename='js/store.js') }}"></script>
+{% endblock %}

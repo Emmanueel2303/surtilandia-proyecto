@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Seguimiento | Surtilandia{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}" />
+{% endblock %}
+
+{% block body %}
+  <header class="site-header">
+    <a class="site-brand" href="{{ url_for('store.home') }}">
+      <span class="site-brand__word">surti</span>
+      <span class="site-brand__bubbles">
+        <span class="bubble bubble--blue">L</span>
+        <span class="bubble bubble--orange">A</span>
+        <span class="bubble bubble--indigo">N</span>
+        <span class="bubble bubble--lime">D</span>
+        <span class="bubble bubble--yellow">I</span>
+        <span class="bubble bubble--pink">A</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="{{ url_for('store.home') }}">Tienda</a>
+      <a href="{{ url_for('store.cart') }}">Carrito <span data-cart-count>0</span></a>
+    </nav>
+  </header>
+
+  <main class="content-shell">
+    <section class="page-panel track-panel">
+      <div class="section-heading">
+        <span class="eyebrow">Seguimiento por ID</span>
+        <h1>Consulta el estado actual de tu pedido.</h1>
+      </div>
+
+      <form class="track-form" method="get">
+        <input name="order_id" placeholder="Ej. SURTI-AB12CD34" value="{{ order_id }}" />
+        <button class="button button--primary" type="submit">Buscar pedido</button>
+      </form>
+
+      {% if not_found %}
+        <div class="empty-state">No encontramos un pedido con ese ID.</div>
+      {% endif %}
+
+      {% if payload %}
+        <div class="tracking-card">
+          <div class="tracking-card__header">
+            <div>
+              <span>ID pedido</span>
+              <strong>{{ payload.order.public_order_id }}</strong>
+            </div>
+            <div>
+              <span>Estado</span>
+              <strong>{{ payload.order.status }}</strong>
+            </div>
+            <div>
+              <span>Total</span>
+              <strong>{{ payload.order.total_display }}</strong>
+            </div>
+          </div>
+
+          <div class="timeline">
+            {% for status in ["Pendiente", "Confirmado", "Enviado", "Entregado"] %}
+              <div class="timeline__step {% if status == payload.order.status %}is-active{% endif %}">
+                {{ status }}
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class="success-items">
+            {% for item in payload["items"] %}
+              <article>
+                <h2>{{ item.product_name_snapshot }}</h2>
+                <p>{{ item.quantity }} x {{ item.unit_price_display }}</p>
+                <strong>{{ item.subtotal_display }}</strong>
+              </article>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </section>
+  </main>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/store.js') }}"></script>
+{% endblock %}
