@@ -1,24 +1,58 @@
 {% extends "admin/layout.html" %}
 
 {% block admin_content %}
+  {% set stats = namespace(active=0, hidden=0, low=0) %}
+  {% for product in products %}
+    {% if product.is_active %}
+      {% set stats.active = stats.active + 1 %}
+    {% else %}
+      {% set stats.hidden = stats.hidden + 1 %}
+    {% endif %}
+    {% if product.stock <= 5 %}
+      {% set stats.low = stats.low + 1 %}
+    {% endif %}
+  {% endfor %}
+
   <section class="admin-section">
     <div class="admin-section__heading admin-section__heading--row">
       <div>
-        <span class="admin-chip">Catalogo</span>
-        <h1>Gestion de productos</h1>
+        <span class="admin-chip">Vitrina</span>
+        <h1>Gestion de referencias</h1>
       </div>
-      <a class="admin-button" href="{{ url_for('admin.product_create') }}">Nuevo producto</a>
+      <a class="admin-button" href="{{ url_for('admin.product_create') }}">Nueva referencia</a>
+    </div>
+
+    <div class="admin-mini-metrics">
+      <div><span>Total</span><strong>{{ products|length }}</strong></div>
+      <div><span>Activas</span><strong>{{ stats.active }}</strong></div>
+      <div><span>Ocultas</span><strong>{{ stats.hidden }}</strong></div>
+      <div><span>Stock bajo</span><strong>{{ stats.low }}</strong></div>
     </div>
 
     <section class="admin-panel">
+      <div class="admin-table-tools" data-admin-controls="products">
+        <label>
+          <span>Buscar referencia</span>
+          <input data-admin-search type="search" placeholder="Nombre, categoria o codigo" />
+        </label>
+        <label>
+          <span>Estado</span>
+          <select data-admin-status>
+            <option value="">Todos</option>
+            <option value="Activo">Activas</option>
+            <option value="Oculto">Ocultas</option>
+          </select>
+        </label>
+      </div>
+
       <div class="table-wrap">
-        <table class="admin-table">
+        <table class="admin-table" data-admin-table="products">
           <thead>
             <tr>
-              <th>Producto</th>
-              <th>Referencia</th>
+              <th>Referencia visual</th>
+              <th>Codigo</th>
               <th>Categoria</th>
-              <th>Precio</th>
+              <th>Valor</th>
               <th>Stock</th>
               <th>Estado</th>
               <th></th>
@@ -26,19 +60,42 @@
           </thead>
           <tbody>
             {% for product in products %}
-              <tr>
-                <td>{{ product.name }}</td>
+              {% set status_label = "Activo" if product.is_active else "Oculto" %}
+              <tr
+                data-admin-row
+                data-search="{{ product.name }} {{ product.reference }} {{ product.category }} {{ status_label }}"
+                data-status="{{ status_label }}"
+              >
+                <td>
+                  <div class="admin-reference">
+                    <img
+                      src="{{ product.primary_image or url_for('static', filename='uploads/surtilandia-logo.jpg') }}"
+                      alt="{{ product.name }}"
+                    />
+                    <div>
+                      <strong>{{ product.name }}</strong>
+                      <span>{{ product.short_description[:72] }}{% if product.short_description|length > 72 %}...{% endif %}</span>
+                    </div>
+                  </div>
+                </td>
                 <td>{{ product.reference }}</td>
                 <td>{{ product.category }}</td>
                 <td>{{ product.price_display }}</td>
-                <td>{{ product.stock }}</td>
-                <td>{{ "Activo" if product.is_active else "Oculto" }}</td>
+                <td>
+                  <span class="admin-stock {% if product.stock <= 5 %}admin-stock--low{% endif %}">
+                    {{ product.stock }} und.
+                  </span>
+                </td>
+                <td><span class="admin-status">{{ status_label }}</span></td>
                 <td><a href="{{ url_for('admin.product_edit', product_id=product.id) }}">Editar</a></td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
+      <p class="admin-empty admin-empty--filtered" data-admin-empty="products" hidden>
+        No hay referencias que coincidan con esos filtros.
+      </p>
     </section>
   </section>
 {% endblock %}

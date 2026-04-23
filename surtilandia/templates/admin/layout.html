@@ -2,31 +2,52 @@
 
 {% block title %}Admin | Surtilandia{% endblock %}
 
+{% block body_class %}admin-app{% endblock %}
+
 {% block styles %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
 {% endblock %}
 
 {% block body %}
   <div class="admin-shell">
+    <div class="admin-brand-watermark" aria-hidden="true">
+      <img src="{{ url_for('static', filename='uploads/surtilandia-logo.jpg') }}" alt="" />
+    </div>
     <aside class="admin-sidebar">
-      <a class="admin-brand" href="{{ url_for('admin.dashboard') }}">Surtilandia Admin</a>
+      <a class="admin-brand" href="{{ url_for('admin.dashboard') }}">
+        <img
+          class="admin-brand__logo"
+          src="{{ url_for('static', filename='uploads/surtilandia-logo.jpg') }}"
+          alt=""
+        />
+        <span class="admin-brand__name">SURTILANDIA</span>
+        <span class="admin-brand__label">Panel administrativo</span>
+      </a>
       <nav>
-        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
-        <a href="{{ url_for('admin.products') }}">Productos</a>
-        <a href="{{ url_for('admin.orders') }}">Pedidos</a>
-        <a href="{{ url_for('admin.customers') }}">Clientes</a>
+        <a class="{% if request.endpoint == 'admin.dashboard' %}is-active{% endif %}" href="{{ url_for('admin.dashboard') }}">Inicio</a>
+        <a class="{% if request.endpoint in ['admin.products', 'admin.product_create', 'admin.product_edit'] %}is-active{% endif %}" href="{{ url_for('admin.products') }}">Referencias</a>
+        <a class="{% if request.endpoint in ['admin.orders', 'admin.order_detail'] %}is-active{% endif %}" href="{{ url_for('admin.orders') }}">Solicitudes</a>
+        <a class="{% if request.endpoint == 'admin.customers' %}is-active{% endif %}" href="{{ url_for('admin.customers') }}">Comunidad</a>
       </nav>
       <a class="admin-logout" href="{{ url_for('admin.logout') }}">Salir</a>
     </aside>
 
     <main class="admin-main">
       <header class="admin-topbar">
+        <div class="admin-topbar__actions">
+          <a class="admin-link-button" href="{{ url_for('store.home') }}" target="_blank" rel="noreferrer">Abrir vitrina</a>
+          <a class="admin-link-button admin-link-button--accent" href="{{ url_for('admin.product_create') }}">Nueva referencia</a>
+        </div>
         <div>
-          <span>Sesion activa</span>
+          <span>Sesi&oacute;n de marca activa</span>
           <strong>{{ session.get("admin_username", "admin") }}</strong>
         </div>
       </header>
       {% block admin_content %}{% endblock %}
     </main>
   </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 {% endblock %}

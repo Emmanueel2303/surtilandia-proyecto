@@ -107,7 +107,7 @@ def create_guest_order(form_data):
         INSERT INTO order_history (order_id, from_status, to_status, note, created_at)
         VALUES (?, ?, ?, ?, ?)
         """,
-        (order_id, "", "Pendiente", "Pedido creado desde checkout invitado.", timestamp),
+        (order_id, "", "Pendiente", "Solicitud creada desde la vitrina Surtilandia.", timestamp),
     )
     db.commit()
 
@@ -168,7 +168,7 @@ def get_order_by_public_id(public_order_id):
     }
 
 
-def update_order_status(public_order_id, status, note=""):
+def update_order_status(public_order_id, status, note="", shipping_carrier="", shipping_guide=""):
     db = get_db()
     order = db.execute(
         "SELECT id, status FROM orders WHERE public_order_id = ?",
@@ -179,8 +179,12 @@ def update_order_status(public_order_id, status, note=""):
 
     timestamp = now_iso()
     db.execute(
-        "UPDATE orders SET status = ?, updated_at = ? WHERE public_order_id = ?",
-        (status, timestamp, public_order_id),
+        """
+        UPDATE orders
+        SET status = ?, shipping_carrier = ?, shipping_guide = ?, updated_at = ?
+        WHERE public_order_id = ?
+        """,
+        (status, shipping_carrier, shipping_guide, timestamp, public_order_id),
     )
     db.execute(
         """

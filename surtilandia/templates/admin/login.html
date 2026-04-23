@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}Login administrador | Surtilandia{% endblock %}
+{% block title %}Acceso Administrativo Surtilandia{% endblock %}
+
+{% block body_class %}admin-auth{% endblock %}
 
 {% block styles %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
@@ -8,10 +10,11 @@
 
 {% block body %}
   <main class="admin-login">
+    <div class="admin-login__brandmark" aria-hidden="true">
+      <img src="{{ url_for('static', filename='uploads/surtilandia-logo.jpg') }}" alt="" />
+    </div>
     <section class="admin-login__card">
-      <span class="admin-chip">Panel administrativo</span>
-      <h1>Acceso Surtilandia</h1>
-      <p>Entra con el usuario demo para gestionar productos, pedidos, clientes y ventas.</p>
+      <h1>Acceso Administrativo Surtilandia</h1>
       {% if login_error %}
         <div class="admin-alert">Usuario o contraseña inválidos.</div>
       {% endif %}

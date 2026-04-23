@@ -12,16 +12,26 @@ class AppBootTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    def test_home_route_uses_original_storefront_copy(self):
+    def test_home_route_uses_surtilandia_brand_copy(self):
         app = create_app({"TESTING": True, "DATABASE_PATH": ":memory:"})
         client = app.test_client()
 
         response = client.get("/")
         body = response.get_data(as_text=True)
 
-        self.assertIn("SURTITODO VIRTUAL", body)
-        self.assertIn("Compra facil por Instagram", body)
+        self.assertIn("MARCA OFICIAL", body)
+        self.assertIn("Contenido oficial de Surtilandia", body)
         self.assertIn("Nuestra esencia", body)
+
+    def test_home_route_does_not_expose_admin_entry(self):
+        app = create_app({"TESTING": True, "DATABASE_PATH": ":memory:"})
+        client = app.test_client()
+
+        response = client.get("/")
+        body = response.get_data(as_text=True)
+
+        self.assertNotIn("/admin", body)
+        self.assertNotIn("Admin", body)
 
 
 if __name__ == "__main__":

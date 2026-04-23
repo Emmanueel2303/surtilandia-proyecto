@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Surtilandia | Ecommerce demo{% endblock %}
+{% block title %}Surtilandia | Marca personal y vitrina oficial{% endblock %}
 
 {% block styles %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}" />
@@ -22,7 +22,7 @@
     <nav class="site-nav">
       <a href="#catalogo">Catalogo</a>
       <a href="{{ url_for('store.track_order') }}">Seguimiento</a>
-      <a href="{{ url_for('store.cart') }}">Carrito <span data-cart-count>0</span></a>
+      <a href="{{ url_for('store.cart') }}">Selecci&oacute;n <span data-cart-count>0</span></a>
       <a href="{{ url_for('admin.login') }}">Admin</a>
     </nav>
   </header>
@@ -30,29 +30,29 @@
   <main>
     <section class="hero">
       <div class="hero__copy">
-        <span class="eyebrow">ECOMMERCE DEMO FUNCIONAL</span>
-        <h1>Surtilandia ahora vende y administra desde una misma base central.</h1>
+        <span class="eyebrow">MARCA PERSONAL SURTILANDIA</span>
+        <h1>Surtilandia presenta su universo de marca desde una vitrina propia.</h1>
         <p>
-          Catalogo real, carrito, checkout invitado, seguimiento por ID y un panel administrativo
-          listo para productos, pedidos, clientes y reportes.
+          Referencias organizadas, selecci&oacute;n clara, seguimiento por ID y un panel administrativo
+          listo para cuidar cada l&iacute;nea, solicitud y contacto de la comunidad.
         </p>
         <div class="hero__actions">
-          <a class="button button--primary" href="#catalogo">Explorar productos</a>
+          <a class="button button--primary" href="#catalogo">Explorar referencias</a>
           <a class="button button--ghost" href="{{ url_for('store.track_order') }}">Ver mi pedido</a>
         </div>
       </div>
       <div class="hero__panel">
         <div class="hero-card">
           <span>Pagos</span>
-          <strong>Wompi demo + contra entrega</strong>
+          <strong>Coordinaci&oacute;n flexible</strong>
         </div>
         <div class="hero-card">
           <span>Pedidos</span>
-          <strong>ID unico para seguimiento</strong>
+          <strong>ID &uacute;nico para seguimiento</strong>
         </div>
         <div class="hero-card">
           <span>Panel admin</span>
-          <strong>Control de productos, stock y estados</strong>
+          <strong>Control de referencias, stock y estados</strong>
         </div>
       </div>
     </section>
@@ -60,25 +60,25 @@
     <section class="feature-strip">
       <article>
         <span>01</span>
-        <h2>Compra completa por la web</h2>
-        <p>El cliente puede navegar, agregar productos, pagar o elegir contra entrega y terminar el pedido.</p>
+        <h2>Vitrina clara de marca</h2>
+        <p>La comunidad puede navegar referencias, guardar una selecci&oacute;n y dejar una solicitud ordenada.</p>
       </article>
       <article>
         <span>02</span>
         <h2>Datos centralizados</h2>
-        <p>Todo queda guardado en una sola base: pedidos, clientes, historial y movimiento de inventario.</p>
+        <p>Todo queda guardado en una sola base: solicitudes, contactos, historial y movimiento de inventario.</p>
       </article>
       <article>
         <span>03</span>
         <h2>Operación administrativa clara</h2>
-        <p>El equipo entra al panel, actualiza estados, revisa ventas y administra el catalogo.</p>
+        <p>El equipo entra al panel, actualiza estados, revisa movimiento y administra la vitrina.</p>
       </article>
     </section>
 
     <section class="catalog-section" id="catalogo">
       <div class="section-heading">
-        <span class="eyebrow">Catalogo demo</span>
-        <h2>Productos listos para venta con stock, precio y detalle.</h2>
+        <span class="eyebrow">Vitrina oficial</span>
+        <h2>Referencias Surtilandia listas para explorar con stock, valor y detalle.</h2>
       </div>
       <div class="product-grid">
         {% for product in products %}

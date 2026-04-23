@@ -40,7 +40,12 @@ class ReportsTests(unittest.TestCase):
 
         self.assertIn("total_orders", summary)
         self.assertIn("total_sales", summary)
+        self.assertIn("status_breakdown", summary)
+        self.assertIn("product_health", summary)
+        self.assertIn("next_actions", summary)
         self.assertEqual(summary["total_orders"], 1)
+        self.assertEqual(summary["status_breakdown"][0]["status"], "Pendiente")
+        self.assertGreaterEqual(summary["product_health"]["active_references"], 1)
 
 
 if __name__ == "__main__":

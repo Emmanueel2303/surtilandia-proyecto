@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Carrito | Surtilandia{% endblock %}
+{% block title %}Selecci&oacute;n | Surtilandia{% endblock %}
 
 {% block styles %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}" />
@@ -20,23 +20,23 @@
       </span>
     </a>
     <nav class="site-nav">
-      <a href="{{ url_for('store.home') }}">Seguir comprando</a>
-      <a href="{{ url_for('store.checkout') }}">Checkout</a>
+      <a href="{{ url_for('store.home') }}">Seguir explorando</a>
+      <a href="{{ url_for('store.checkout') }}">Solicitud</a>
     </nav>
   </header>
 
   <main class="content-shell">
     <section class="page-panel">
       <div class="section-heading">
-        <span class="eyebrow">Tu carrito</span>
-        <h1>Revisa tus productos antes de continuar.</h1>
+        <span class="eyebrow">Tu selecci&oacute;n</span>
+        <h1>Revisa tus referencias antes de enviar la solicitud.</h1>
       </div>
       <div class="cart-grid">
         <div class="cart-list" data-cart-root></div>
         <aside class="cart-summary" data-cart-summary>
           <h2>Resumen</h2>
-          <p>El total final se reflejará también en el checkout.</p>
-          <a class="button button--primary" href="{{ url_for('store.checkout') }}">Continuar al checkout</a>
+          <p>El total final se reflejar&aacute; tambi&eacute;n en la solicitud.</p>
+          <a class="button button--primary" href="{{ url_for('store.checkout') }}">Continuar solicitud</a>
         </aside>
       </div>
     </section>

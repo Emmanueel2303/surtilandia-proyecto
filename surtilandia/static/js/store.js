@@ -68,8 +68,8 @@
 
     const items = buildCartItems();
     if (!items.length) {
-      root.innerHTML = '<div class="empty-state">Tu carrito esta vacio. Agrega productos desde la tienda.</div>';
-      summary.innerHTML = "<h2>Resumen</h2><p>Sin productos seleccionados.</p>";
+      root.innerHTML = '<div class="empty-state">Tu seleccion esta vacia. Agrega referencias desde la vitrina.</div>';
+      summary.innerHTML = "<h2>Resumen</h2><p>Sin referencias seleccionadas.</p>";
       return;
     }
 
@@ -91,9 +91,9 @@
 
     summary.innerHTML = `
       <h2>Resumen</h2>
-      <p>${items.length} producto(s)</p>
+      <p>${items.length} referencia(s)</p>
       <strong class="summary-total">${formatCurrency(total)}</strong>
-      <a class="button button--primary" href="/checkout">Continuar al checkout</a>
+      <a class="button button--primary" href="/checkout">Continuar solicitud</a>
     `;
   }
 
@@ -105,7 +105,7 @@
 
     const items = buildCartItems();
     if (!items.length) {
-      summaryRoot.innerHTML = '<div class="empty-state">No hay productos en el carrito.</div>';
+      summaryRoot.innerHTML = '<div class="empty-state">No hay referencias en tu seleccion.</div>';
       form.querySelector('button[type="submit"]').disabled = true;
       return;
     }

@@ -21,7 +21,7 @@
     </a>
     <nav class="site-nav">
       <a href="{{ url_for('store.home') }}">Inicio</a>
-      <a href="{{ url_for('store.cart') }}">Carrito <span data-cart-count>0</span></a>
+      <a href="{{ url_for('store.cart') }}">Selecci&oacute;n <span data-cart-count>0</span></a>
     </nav>
   </header>
 
@@ -65,9 +65,9 @@
           data-product-price="{{ product.price }}"
           data-product-image="{{ product.primary_image }}"
         >
-          Agregar al carrito
+          Agregar a selecci&oacute;n
         </button>
-        <a class="button button--ghost" href="{{ url_for('store.checkout') }}">Ir a checkout</a>
+        <a class="button button--ghost" href="{{ url_for('store.checkout') }}">Ir a solicitud</a>
       </div>
     </div>
   </main>

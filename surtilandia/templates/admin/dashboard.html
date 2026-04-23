@@ -2,35 +2,108 @@
 
 {% block admin_content %}
   <section class="admin-section">
-    <div class="admin-section__heading">
-      <span class="admin-chip">Resumen operativo</span>
-      <h1>Vista general del ecommerce</h1>
+    <div class="admin-hero">
+      <div>
+        <span class="admin-chip">Centro operativo</span>
+        <h1>Surtilandia en tiempo real</h1>
+        <p>
+          Controla solicitudes, referencias, comunidad e inventario desde una vista pensada para operar la marca con claridad.
+        </p>
+      </div>
+      <div class="admin-hero__actions">
+        <a class="admin-button" href="{{ url_for('admin.orders') }}">Revisar solicitudes</a>
+        <a class="admin-button admin-button--ghost" href="{{ url_for('admin.products') }}">Gestionar vitrina</a>
+      </div>
     </div>
 
     <div class="kpi-grid">
-      <article class="kpi-card">
-        <span>Pedidos totales</span>
+      <article class="kpi-card kpi-card--blue">
+        <span>Solicitudes totales</span>
         <strong>{{ summary.total_orders }}</strong>
+        <small>{{ summary.pending_work }} en seguimiento</small>
       </article>
-      <article class="kpi-card">
-        <span>Ventas acumuladas</span>
+      <article class="kpi-card kpi-card--yellow">
+        <span>Valor gestionado</span>
         <strong>{{ summary.total_sales_display }}</strong>
+        <small>Promedio {{ summary.average_order_display }}</small>
       </article>
-      <article class="kpi-card">
-        <span>Pedidos pendientes</span>
-        <strong>{{ summary.pending_orders }}</strong>
+      <article class="kpi-card kpi-card--lime">
+        <span>Comunidad registrada</span>
+        <strong>{{ summary.total_customers }}</strong>
+        <small>Contactos en base</small>
       </article>
-      <article class="kpi-card">
-        <span>Entregados</span>
-        <strong>{{ summary.delivered_orders }}</strong>
+      <article class="kpi-card kpi-card--pink">
+        <span>Cierre operativo</span>
+        <strong>{{ summary.fulfillment_rate }}%</strong>
+        <small>{{ summary.delivered_orders }} completadas</small>
       </article>
     </div>
 
-    <div class="admin-grid">
+    <div class="admin-dashboard-grid">
+      <section class="admin-panel admin-panel--wide">
+        <div class="admin-panel__header">
+          <div>
+            <h2>Flujo de solicitudes</h2>
+            <p>Etapas activas para saber que necesita atencion primero.</p>
+          </div>
+          <a href="{{ url_for('admin.orders') }}">Ver solicitudes</a>
+        </div>
+        <div class="status-flow">
+          {% for item in summary.status_breakdown %}
+            <article class="status-flow__item">
+              <div>
+                <span>{{ item.status }}</span>
+                <strong>{{ item.count }}</strong>
+              </div>
+              <div class="status-flow__track" aria-hidden="true">
+                <span style="--progress: {{ item.percent }}%"></span>
+              </div>
+              <small>{{ item.percent }}% del flujo</small>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+
       <section class="admin-panel">
         <div class="admin-panel__header">
-          <h2>Pedidos recientes</h2>
-          <a href="{{ url_for('admin.orders') }}">Ver todos</a>
+          <div>
+            <h2>Acciones prioritarias</h2>
+            <p>Checklist diario de administracion.</p>
+          </div>
+        </div>
+        <div class="action-list">
+          {% for action in summary.next_actions %}
+            <div class="action-list__item action-list__item--{{ action.tone }}">
+              <span>{{ action.label }}</span>
+              <strong>{{ action.value }}</strong>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="admin-panel">
+        <div class="admin-panel__header">
+          <div>
+            <h2>Salud de vitrina</h2>
+            <p>Estado de referencias y unidades disponibles.</p>
+          </div>
+          <a href="{{ url_for('admin.products') }}">Editar</a>
+        </div>
+        <div class="brand-health">
+          <div><span>Referencias</span><strong>{{ summary.product_health.total_references }}</strong></div>
+          <div><span>Activas</span><strong>{{ summary.product_health.active_references }}</strong></div>
+          <div><span>Ocultas</span><strong>{{ summary.product_health.hidden_references }}</strong></div>
+          <div><span>Unidades</span><strong>{{ summary.product_health.total_units }}</strong></div>
+        </div>
+      </section>
+
+      <section class="admin-panel">
+        <div class="admin-panel__header">
+          <div>
+            <h2>Solicitudes recientes</h2>
+            <p>Ultimos contactos que entraron a la operacion.</p>
+          </div>
+          <a href="{{ url_for('admin.orders') }}">Ver todas</a>
         </div>
         <div class="admin-list">
           {% for order in summary.recent_orders %}
@@ -40,19 +113,22 @@
                 <p>{{ order.full_name }} · {{ order.city }}</p>
               </div>
               <div>
-                <span>{{ order.status }}</span>
+                <span class="admin-status">{{ order.status }}</span>
                 <strong>{{ order.total_display }}</strong>
               </div>
             </a>
           {% else %}
-            <p class="admin-empty">Aun no hay pedidos registrados.</p>
+            <p class="admin-empty">Aun no hay solicitudes registradas.</p>
           {% endfor %}
         </div>
       </section>
 
       <section class="admin-panel">
         <div class="admin-panel__header">
-          <h2>Stock bajo</h2>
+          <div>
+            <h2>Referencias por revisar</h2>
+            <p>Stock bajo o referencias que conviene priorizar.</p>
+          </div>
           <a href="{{ url_for('admin.products') }}">Gestionar</a>
         </div>
         <div class="admin-list">
@@ -60,14 +136,38 @@
             <div class="admin-list__item">
               <div>
                 <strong>{{ product.name }}</strong>
-                <p>ID {{ product.id }}</p>
+                <p>{{ product.category }} · ID {{ product.id }}</p>
               </div>
               <div>
                 <span>{{ product.stock }} und.</span>
               </div>
             </div>
           {% else %}
-            <p class="admin-empty">No hay alertas de inventario.</p>
+            <p class="admin-empty">No hay referencias por revisar.</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="admin-panel">
+        <div class="admin-panel__header">
+          <div>
+            <h2>Referencias con mayor movimiento</h2>
+            <p>Lectura rapida de lo que mas tracciona.</p>
+          </div>
+        </div>
+        <div class="movement-list">
+          {% for product in summary.top_products %}
+            <div class="movement-list__item">
+              <div>
+                <strong>{{ product.name }}</strong>
+                <span>{{ product.total_units }} unidades</span>
+              </div>
+              <div class="movement-list__bar" aria-hidden="true">
+                <span style="--progress: {{ product.percent }}%"></span>
+              </div>
+            </div>
+          {% else %}
+            <p class="admin-empty">Aun no hay movimiento suficiente para destacar referencias.</p>
           {% endfor %}
         </div>
       </section>

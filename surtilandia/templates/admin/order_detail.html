@@ -2,21 +2,33 @@
 
 {% block admin_content %}
   <section class="admin-section">
-    <div class="admin-section__heading">
-      <span class="admin-chip">Pedido</span>
-      <h1>{{ payload.order.public_order_id }}</h1>
+    <div class="admin-section__heading admin-section__heading--row">
+      <div>
+        <span class="admin-chip">Solicitud</span>
+        <h1>{{ payload.order.public_order_id }}</h1>
+      </div>
+      <a class="admin-button admin-button--ghost" href="{{ url_for('admin.orders') }}">Volver al seguimiento</a>
     </div>
 
     <div class="admin-grid">
       <section class="admin-panel">
-        <h2>Resumen</h2>
+        <div class="admin-panel__header">
+          <div>
+            <h2>Resumen del contacto</h2>
+            <p>Datos principales para confirmar y hacer seguimiento.</p>
+          </div>
+          <span class="admin-status">{{ payload.order.status }}</span>
+        </div>
+
         <dl class="detail-list">
-          <div><dt>Cliente</dt><dd>{{ payload.order.full_name }}</dd></div>
+          <div><dt>Contacto</dt><dd>{{ payload.order.full_name }}</dd></div>
           <div><dt>Telefono</dt><dd>{{ payload.order.phone }}</dd></div>
           <div><dt>Correo</dt><dd>{{ payload.order.email }}</dd></div>
-          <div><dt>Estado</dt><dd>{{ payload.order.status }}</dd></div>
           <div><dt>Pago</dt><dd>{{ payload.order.payment_method }} · {{ payload.order.payment_status }}</dd></div>
           <div><dt>Total</dt><dd>{{ payload.order.total_display }}</dd></div>
+          <div><dt>Direccion</dt><dd>{{ payload.order.shipping_address_snapshot }}</dd></div>
+          <div><dt>Transportadora</dt><dd>{{ payload.order.shipping_carrier or "Sin asignar" }}</dd></div>
+          <div><dt>Guia</dt><dd>{{ payload.order.shipping_guide or "Sin asignar" }}</dd></div>
         </dl>
 
         <form class="admin-status-form" method="post" action="{{ url_for('admin.update_order', public_order_id=payload.order.public_order_id) }}">
@@ -28,16 +40,31 @@
               {% endfor %}
             </select>
           </label>
+          <div class="admin-form__grid">
+            <label>
+              <span>Transportadora</span>
+              <input name="shipping_carrier" value="{{ payload.order.shipping_carrier }}" placeholder="Ej. Servientrega" />
+            </label>
+            <label>
+              <span>Numero de guia</span>
+              <input name="shipping_guide" value="{{ payload.order.shipping_guide }}" placeholder="Guia o codigo interno" />
+            </label>
+          </div>
           <label>
             <span>Nota interna</span>
-            <textarea name="note" rows="3"></textarea>
+            <textarea name="note" rows="3" placeholder="Agrega contexto para el historial"></textarea>
           </label>
-          <button class="admin-button" type="submit">Actualizar pedido</button>
+          <button class="admin-button" type="submit">Actualizar solicitud</button>
         </form>
       </section>
 
       <section class="admin-panel">
-        <h2>Items</h2>
+        <div class="admin-panel__header">
+          <div>
+            <h2>Referencias solicitadas</h2>
+            <p>Detalle de unidades y valor por linea.</p>
+          </div>
+        </div>
         <div class="admin-list">
           {% for item in payload["items"] %}
             <div class="admin-list__item">
@@ -50,7 +77,12 @@
           {% endfor %}
         </div>
 
-        <h2>Historial</h2>
+        <div class="admin-panel__header admin-panel__header--spaced">
+          <div>
+            <h2>Historial</h2>
+            <p>Registro de cambios para auditoria interna.</p>
+          </div>
+        </div>
         <div class="admin-list">
           {% for event in payload["history"] %}
             <div class="admin-list__item">

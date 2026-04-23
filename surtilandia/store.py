@@ -23,10 +23,10 @@ def home():
     legacy_html = (PROJECT_ROOT / "index.html").read_text(encoding="utf-8")
     legacy_html = legacy_html.replace('./styles.css', url_for("store.legacy_asset", filename="styles.css"))
     legacy_html = legacy_html.replace(
-        '<script src="./main.js"></script>',
+        '<script type="module" src="./main.js"></script>',
         (
             f"<script>window.SURTI_PRODUCTS = {json.dumps(_build_legacy_products(products), ensure_ascii=False)};</script>\n"
-            f'<script src="{url_for("store.legacy_asset", filename="main.js")}"></script>'
+            f'<script type="module" src="{url_for("store.legacy_asset", filename="main.js")}"></script>'
         ),
     )
     return current_app.response_class(legacy_html, mimetype="text/html")
@@ -34,7 +34,10 @@ def home():
 
 @store_bp.get("/legacy/<path:filename>")
 def legacy_asset(filename):
-    if filename not in {"styles.css", "main.js"}:
+    is_entry_asset = filename in {"styles.css", "main.js"}
+    is_home_asset = filename.startswith(("assets/css/", "assets/js/")) and Path(filename).suffix in {".css", ".js"}
+
+    if not (is_entry_asset or is_home_asset):
         abort(404)
     return send_from_directory(PROJECT_ROOT, filename)
 
@@ -104,10 +107,10 @@ def _build_legacy_products(products):
     badges = ["Top", "Flash", "Nuevo", "Combo"]
     cities = ["Bogota", "Medellin", "Cali", "Barranquilla"]
     deliveries = [
-        "Entrega 24 a 48 horas",
-        "Despacho nacional",
-        "Listo para envio",
-        "Entrega en ciudades principales",
+        "Referencia destacada",
+        "Vitrina oficial",
+        "Contenido Surtilandia",
+        "Linea de marca",
     ]
 
     legacy_products = []

@@ -1,29 +1,53 @@
 {% extends "admin/layout.html" %}
 
 {% block admin_content %}
+  {% set stats = namespace(with_orders=0, cities=[]) %}
+  {% for customer in customers %}
+    {% if customer.total_orders > 0 %}
+      {% set stats.with_orders = stats.with_orders + 1 %}
+    {% endif %}
+  {% endfor %}
+
   <section class="admin-section">
     <div class="admin-section__heading">
-      <span class="admin-chip">Clientes</span>
-      <h1>Base de compradores</h1>
+      <span class="admin-chip">Comunidad</span>
+      <h1>Base de contactos</h1>
+    </div>
+
+    <div class="admin-mini-metrics">
+      <div><span>Contactos</span><strong>{{ customers|length }}</strong></div>
+      <div><span>Con actividad</span><strong>{{ stats.with_orders }}</strong></div>
+      <div><span>Seguimiento</span><strong>{{ customers|length - stats.with_orders }}</strong></div>
+      <div><span>Canal</span><strong>Social</strong></div>
     </div>
 
     <section class="admin-panel">
+      <div class="admin-table-tools" data-admin-controls="customers">
+        <label>
+          <span>Buscar contacto</span>
+          <input data-admin-search type="search" placeholder="Nombre, telefono, correo o ciudad" />
+        </label>
+      </div>
+
       <div class="table-wrap">
-        <table class="admin-table">
+        <table class="admin-table" data-admin-table="customers">
           <thead>
             <tr>
-              <th>Nombre</th>
+              <th>Contacto</th>
               <th>Telefono</th>
               <th>Correo</th>
               <th>Ciudad</th>
-              <th>Pedidos</th>
-              <th>Total comprado</th>
+              <th>Solicitudes</th>
+              <th>Valor historico</th>
             </tr>
           </thead>
           <tbody>
             {% for customer in customers %}
-              <tr>
-                <td>{{ customer.full_name }}</td>
+              <tr
+                data-admin-row
+                data-search="{{ customer.full_name }} {{ customer.phone }} {{ customer.email }} {{ customer.city }}"
+              >
+                <td><strong>{{ customer.full_name }}</strong></td>
                 <td>{{ customer.phone }}</td>
                 <td>{{ customer.email }}</td>
                 <td>{{ customer.city }}</td>
@@ -32,12 +56,15 @@
               </tr>
             {% else %}
               <tr>
-                <td colspan="6">No hay clientes registrados todavia.</td>
+                <td colspan="6">No hay contactos registrados todavia.</td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
+      <p class="admin-empty admin-empty--filtered" data-admin-empty="customers" hidden>
+        No hay contactos que coincidan con esa busqueda.
+      </p>
     </section>
   </section>
 {% endblock %}

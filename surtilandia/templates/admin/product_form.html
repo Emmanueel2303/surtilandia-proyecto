@@ -3,7 +3,7 @@
 {% block admin_content %}
   <section class="admin-section">
     <div class="admin-section__heading">
-      <span class="admin-chip">Productos</span>
+      <span class="admin-chip">Referencias</span>
       <h1>{{ form_title }}</h1>
     </div>
 
@@ -26,7 +26,7 @@
           <input name="category" value="{{ product.category if product else '' }}" required />
         </label>
         <label>
-          <span>Precio</span>
+          <span>Valor</span>
           <input name="price" type="number" min="0" value="{{ product.price if product else '' }}" required />
         </label>
         <label>
@@ -34,11 +34,11 @@
           <input name="stock" type="number" min="0" value="{{ product.stock if product else '' }}" required />
         </label>
         <label class="admin-form__full">
-          <span>Descripcion corta</span>
+          <span>Descripcion corta de marca</span>
           <textarea name="short_description" rows="3" required>{{ product.short_description if product else '' }}</textarea>
         </label>
         <label class="admin-form__full">
-          <span>Detalles</span>
+          <span>Detalles de la referencia</span>
           <textarea name="details" rows="5" required>{{ product.details if product else '' }}</textarea>
         </label>
         <label class="admin-form__full">
@@ -60,7 +60,7 @@
       {% endif %}
 
       <div class="admin-form__actions">
-        <button class="admin-button" type="submit">Guardar producto</button>
+        <button class="admin-button" type="submit">Guardar referencia</button>
         <a class="admin-button admin-button--ghost" href="{{ url_for('admin.products') }}">Cancelar</a>
       </div>
     </form>

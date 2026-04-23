@@ -141,6 +141,8 @@ def update_order(public_order_id):
         public_order_id,
         request.form["status"],
         request.form.get("note", ""),
+        request.form.get("shipping_carrier", ""),
+        request.form.get("shipping_guide", ""),
     )
     return redirect(url_for("admin.order_detail", public_order_id=public_order_id))
 

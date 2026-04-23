@@ -42,7 +42,11 @@ class AdminOrderTests(unittest.TestCase):
     def test_admin_can_move_order_to_enviado(self):
         response = self.client.post(
             f"/admin/orders/{self.public_order_id}/status",
-            data={"status": "Enviado"},
+            data={
+                "status": "Enviado",
+                "shipping_carrier": "Servientrega",
+                "shipping_guide": "SURTI123",
+            },
             follow_redirects=False,
         )
 
@@ -51,11 +55,13 @@ class AdminOrderTests(unittest.TestCase):
         with self.app.app_context():
             db = get_db()
             order = db.execute(
-                "SELECT status FROM orders WHERE public_order_id = ?",
+                "SELECT status, shipping_carrier, shipping_guide FROM orders WHERE public_order_id = ?",
                 (self.public_order_id,),
             ).fetchone()
 
         self.assertEqual(order["status"], "Enviado")
+        self.assertEqual(order["shipping_carrier"], "Servientrega")
+        self.assertEqual(order["shipping_guide"], "SURTI123")
 
 
 if __name__ == "__main__":

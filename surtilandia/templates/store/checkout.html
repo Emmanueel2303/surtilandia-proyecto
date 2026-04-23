@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Checkout | Surtilandia{% endblock %}
+{% block title %}Solicitud | Surtilandia{% endblock %}
 
 {% block styles %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}" />
@@ -20,7 +20,7 @@
       </span>
     </a>
     <nav class="site-nav">
-      <a href="{{ url_for('store.cart') }}">Carrito</a>
+      <a href="{{ url_for('store.cart') }}">Selecci&oacute;n</a>
       <a href="{{ url_for('store.track_order') }}">Seguimiento</a>
     </nav>
   </header>
@@ -29,8 +29,8 @@
     <section class="checkout-grid">
       <form class="page-panel checkout-form" method="post" action="{{ url_for('store.checkout_submit') }}" data-checkout-form>
         <div class="section-heading">
-          <span class="eyebrow">Checkout invitado</span>
-          <h1>Completa los datos del pedido.</h1>
+          <span class="eyebrow">Solicitud Surtilandia</span>
+          <h1>Completa los datos para coordinar tu referencia.</h1>
         </div>
         <div class="form-grid">
           <label>
@@ -79,11 +79,11 @@
 
         <input name="items" type="hidden" data-checkout-items />
 
-        <button class="button button--primary button--full" type="submit">Crear pedido</button>
+        <button class="button button--primary button--full" type="submit">Crear solicitud</button>
       </form>
 
       <aside class="page-panel checkout-summary">
-        <h2>Resumen del pedido</h2>
+        <h2>Resumen de la solicitud</h2>
         <div data-checkout-summary></div>
       </aside>
     </section>
